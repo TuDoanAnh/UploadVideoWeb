@@ -5,6 +5,7 @@ import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
 function Button({
+    className,
     to,
     href,
     primary = false,
@@ -15,6 +16,8 @@ function Button({
     small = false,
     large = false,
     children,
+    rightIcon,
+    leftIcon,
     onClick,
     ...passProp
 }) {
@@ -37,8 +40,22 @@ function Button({
     }
 
     return (
-        <Comp className={cx('container', { primary, outline, small, large, text, disable, round })} {..._props}>
-            <span>{children}</span>
+        <Comp
+            className={cx('container', {
+                primary,
+                outline,
+                small,
+                large,
+                text,
+                disable,
+                round,
+                [className]: className,
+            })}
+            {..._props}
+        >
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
+            <span className={cx('title')}>{children}</span>
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
 }
