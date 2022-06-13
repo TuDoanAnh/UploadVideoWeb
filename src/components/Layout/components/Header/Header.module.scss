@@ -88,10 +88,29 @@
     color: rgba(22, 24, 35, 0.34);
 }
 
+.action {
+    display: flex;
+    align-items: center;
+}
 .more-btn {
     font-size: 2rem;
     margin-left: 28px;
     background: transparent;
     padding: 8px;
+    cursor: pointer;
+}
+.action-btn {
+    color: #161823;
+    background-color: transparent;
+    font-size: 2.1rem;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 15px;
     cursor: pointer;
 }

@@ -1,22 +1,31 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import {
+    faAssistiveListeningSystems,
     faCircleQuestion,
     faCircleXmark,
+    faCloudUpload,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
     faMagnifyingGlass,
+    faMessage,
+    faPersonRifle,
+    faSignOut,
     faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Header.module.scss';
 import image from '~/assets/image';
 import Tippy from '@tippyjs/react/headless';
+import Typpi from '@tippyjs/react';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import 'tippy.js/dist/tippy.css';
+import { faGetPocket } from '@fortawesome/free-brands-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -48,7 +57,7 @@ const MENU_ITEMS = [
         title: 'KeyBoard Shortcuts',
     },
 ];
-
+const currentUser = true;
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
     useEffect(() => {
@@ -59,6 +68,31 @@ function Header() {
     }, []);
 
     const handleMenuChange = () => {};
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faPersonRifle} />,
+            title: 'View Profile',
+            to: '/@charizard',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGetPocket} />,
+            title: 'Bruh Bruh',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -91,14 +125,36 @@ function Header() {
                         </button>
                     </div>
                 </Tippy>
-                <div className={cx('action')}>
-                    <Button text>Log in</Button>
-                    <Button primary>Log in</Button>
 
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                <div className={cx('action')}>
+                    {currentUser ? (
+                        <>
+                            <Typpi content="Upload Video" placement="bottom" delay={(0, 200)}>
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                </button>
+                            </Typpi>
+                            <Typpi content="Message" placement="bottom" delay={(0, 200)}>
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faMessage} />
+                                </button>
+                            </Typpi>
+                        </>
+                    ) : (
+                        <>
+                            <Button text>Log in</Button>
+                            <Button primary>Log in</Button>
+                        </>
+                    )}
+
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <img src={image.avatar} className={cx('user-avatar')} alt="Charizard" />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>
