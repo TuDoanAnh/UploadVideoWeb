@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import {
-    faAssistiveListeningSystems,
     faCircleQuestion,
     faCircleXmark,
-    faCloudUpload,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
@@ -26,7 +24,8 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import 'tippy.js/dist/tippy.css';
 import { faGetPocket } from '@fortawesome/free-brands-svg-icons';
-
+import { UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -131,7 +130,7 @@ function Header() {
                         <>
                             <Typpi content="Upload Video" placement="bottom" delay={(0, 200)}>
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
                                 </button>
                             </Typpi>
                             <Typpi content="Message" placement="bottom" delay={(0, 200)}>
@@ -149,7 +148,7 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img src={image.avatar} className={cx('user-avatar')} alt="Charizard" />
+                            <Image src={'aaa'} className={cx('user-avatar')} alt="Charizard" />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
