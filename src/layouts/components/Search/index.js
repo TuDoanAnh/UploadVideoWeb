@@ -8,7 +8,7 @@ import 'tippy.js/dist/tippy.css';
 import styles from './Search.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useDebounce } from '../../hooks';
-import * as searchService from '~/API/searchService';
+import * as searchService from '~/services/searchService';
 const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearchValue] = useState('');
